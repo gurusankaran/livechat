@@ -91,11 +91,7 @@ messageInput.addEventListener('blur',(e)=>{
 
 socket.on('feedback',(data)=>{
   clearFeedBack()
-  // messageContainer.innerHTML += `<li class="message-feedback">
-  //         <p class="feedback" id="feedback">${data.feedback}</p>
-  //       </li>`
   document.getElementById('feedback').innerText = data.feedback
-  console.log(data.feedback);
 })
 
 function clearFeedBack(){
