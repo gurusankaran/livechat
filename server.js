@@ -18,7 +18,7 @@ let socketConnected = new Set()
 io.on('connection',onConnected)
 
 function onConnected(socket){
-    console.log(socket.issued);
+    console.log(socket.id);
     socketConnected.add(socket.id)
 
     io.emit('client-total',socketConnected.size)
