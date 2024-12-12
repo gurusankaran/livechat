@@ -24,12 +24,13 @@
           value="anonymous"
           maxlength="20"
         />
-        
+        <span class="feedback" id="feedback"></span>
       </div>
 
       <ul class="message-container" id="message-container">
         <!-- These li elements are only for reference, and therefore, they are commented out... -->
         <!-- <li class="message-left">
+          <p class="tagMessage left-tag">i</p>
           <p class="message">
             lorem impsun
             <span>bluebird ● 26 July 10:40</span>
@@ -37,6 +38,7 @@
         </li>
 
         <li class="message-right">
+          <p class="tagMessage right-tag">i</p>
           <p class="message">
             lorem impsun
             <span>bluebird ● 26 July 10:40</span>
@@ -48,6 +50,10 @@
         </li> -->
       </ul>
 
+      <div class="replyContainer" style="display: none;">
+        <span id="replyMessage"></span>
+        <i class="fa fa-times closeIcon" onclick="replyClose()"></i>
+      </div>
       <form class="message-form" id="message-form">
         <input
           type="text"
@@ -70,5 +76,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="main.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>
