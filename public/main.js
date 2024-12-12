@@ -34,7 +34,7 @@ function sendMessage(){
 }
 
 socket.on('chat-message',(data)=>{
-  console.log(data);
+  // console.log(data);
   addMessageToUI(false,data)
 
 })
