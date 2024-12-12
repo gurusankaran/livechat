@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3500
 
 
 app.use(express.static('public'))
@@ -9,7 +9,7 @@ app.use(express.static('public'))
 // })
 
 const io = require('socket.io')(app.listen(port,()=>{
-    console.log(`Port listening on ${port}`);
+    console.log(`Port listening on http://localhost:${port}`);
 const io = require('socket.io')
 }))
 
@@ -18,20 +18,20 @@ let socketConnected = new Set()
 io.on('connection',onConnected)
 
 function onConnected(socket){
-    console.log(socket.id);
+    console.log(socket.issued);
     socketConnected.add(socket.id)
 
     io.emit('client-total',socketConnected.size)
 
     socket.on('disconnect',()=>{
-        console.log('disconnected');
         socketConnected.delete(socket.id)
         io.emit('client-total',socketConnected.size)
     })
 
     socket.on('message',(data)=>{
-        console.log(data);
-        socket.broadcast.emit('chat-message',data)
+        const randomID = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        data.id = randomID        
+        socket.broadcast.emit('chat-message', data)
     })
 
     socket.on('feedback',(data)=>{
