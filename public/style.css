@@ -191,9 +191,9 @@ body {
   border: 5px solid grey;
   border-radius: 7px;
   display: flex;
-  justify-content: center;
   align-content: space-around;
-  flex-wrap: wrap;
+  overflow: hidden;
+  max-width: 400px;
 }
 
 #replyMessage{
@@ -207,6 +207,8 @@ body {
 
 .tagMessage{
   width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
   padding: 3px;
   border-radius: 10px;
   text-align: center;

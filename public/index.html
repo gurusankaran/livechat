@@ -55,8 +55,11 @@
         <span id="replyMessage"></span>
         <i class="fa fa-times closeIcon" onclick="replyClose()"></i>
       </div>
-      <form class="message-form" id="message-form">
+      <form class="message-form" id="message-form" style="background-color: white;">
+        <i onclick="openfile()" class="fa fa-paperclip" style="background-color:white;margin: 15px;cursor: pointer;"></i>
+        <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelection(event)" />
         <input
+          autocomplete="off"
           type="text"
           name="message"
           id="message-input"

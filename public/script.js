@@ -10,8 +10,8 @@ function revealOption(id){
 
 function replyButton(id){
     var element = document.querySelector(`.message[data-message-id="${id}"]`);
-    const messageElement = element.innerText.replace(element.querySelector('span').innerText, '').trim();
-    document.querySelector('.replyContainer').style.display = 'block'
+    const messageElement = element.innerHTML
+    document.querySelector('.replyContainer').style.display = 'flex'
     document.querySelector('#replyMessage').innerHTML = messageElement
     document.getElementById('message-input').focus()
 
