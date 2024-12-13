@@ -39,22 +39,21 @@ function sendMessage() {
     const data = {
       name: nameInput.value,
       message: content,
-      isFile: fileInput.files.length > 0, // Indicate if the message contains a file
-      fileName: fileInput.files[0]?.name, // Optional: Include file name for future use
+      isFile: fileInput.files.length > 0,
+      fileName: fileInput.files[0]?.name,
       dateTime: new Date().toLocaleTimeString(),
       id: Date.now().toString(36) + Math.random().toString(36).substr(2, 9),
     };
 
-    // Include replyMessage if it exists
     if (replyMessage.innerText !== '') {
       data.replyMessage = replyMessage.innerHTML;
       data.referId = referId      
     }
 
-    socket.emit('message', data); // Emit the message through WebSocket
-    addMessageToUI(true, data); // Add the message to the UI
+    socket.emit('message', data);
+    addMessageToUI(true, data);
     messageInput.value = '';
-    fileInput.value = ''; // Clear the file input
+    fileInput.value = '';
     replyClose();
   }).catch((error) => {
     console.error('Error reading file:', error);
@@ -89,7 +88,7 @@ function addMessageToUI(isOwnMessage, data) {
           ? `<p href="#${data.referId}" onclick="anchorTag('${data.id}','${data.referId}')" class="tagMessage ${isOwnMessage ? "right-tag" : "left-tag"}">${data.replyMessage}</p>` 
           : ''}
         ${fileElement} 
-        <span>${data.name} ● ${data.dateTime}</span>
+        <span><i>${data.name}<i/> ● ${data.dateTime}</span>
     </li>
   `;
 
@@ -107,10 +106,13 @@ messageInput.addEventListener('focus',(e)=>{
     feedback:`${nameInput.value} is typing`
   })
 })
-messageInput.addEventListener('keypress',(e)=>{
-  socket.emit('feedback',{
-    feedback:`${nameInput.value} is typing`
-  })
+document.addEventListener('keypress',(e)=>{
+  if(e.key == 'Enter'){
+    return
+  }
+  e.preventDefault()
+  messageInput.value += e.key
+  messageInput.focus()
 })
 messageInput.addEventListener('blur',(e)=>{
   socket.emit('feedback',{
@@ -123,6 +125,11 @@ socket.on('feedback',(data)=>{
   document.getElementById('feedback').innerText = data.feedback
 })
 
+socket.on('server-message',(data)=>{
+  clearFeedBack()
+  document.getElementById('client-total').innerText = data
+})
+
 function clearFeedBack(){
   document.querySelectorAll('li.message-feedback').forEach(element=>{
     element.parentNode.removeChild(element)
@@ -130,11 +137,10 @@ function clearFeedBack(){
 }
 
 function openfile() {
-  document.getElementById('fileInput').click(); // Programmatically trigger the file input
+  document.getElementById('fileInput').click();
 }
 
 async function handleFileSelection(event){
-  const file = event.target.files[0]; // Get the selected file
-  console.log(fileInput.files[0]);
+  const file = event.target.files[0];
   sendMessage()
 }

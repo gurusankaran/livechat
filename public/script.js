@@ -35,18 +35,14 @@ function anchorTag(id,referId){
     const observer = new IntersectionObserver(
         (entries) => {
             if (entries[0].isIntersecting) {
-                console.log('red');
                 element.style.boxShadow = '0 0 30px red';
-
                 setTimeout(() => {
                     element.style.boxShadow = 'none';
                 }, 3000);
-
                 observer.disconnect();
             }
         },
         { threshold: 1.0 }
     );
-
     observer.observe(element);
 }
