@@ -46,3 +46,15 @@ function anchorTag(id,referId){
     );
     observer.observe(element);
 }
+
+function openImage(data){
+    document.querySelector('.content').classList.add('blurEffect')
+    document.querySelector('.big-image').src=data
+    document.querySelector('.big-image-container').hidden = false
+}
+
+function closeImage(){
+    document.querySelector('.content').classList.remove('blurEffect')
+    document.querySelector('.big-image').src=''
+    document.querySelector('.big-image-container').hidden = true
+}

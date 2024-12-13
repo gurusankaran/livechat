@@ -1,0 +1,16 @@
+@media all and (max-width: 600px) {  /* mobile view */
+    .main{
+      width: 95%;
+      margin-top: 0px;
+    }
+    .title{
+      display: none;
+    }
+    .clients-total {
+      margin: 0px 0;
+      color: #7e7e7e;
+    }
+    .message-container{
+      height: 450px;
+    }
+  }

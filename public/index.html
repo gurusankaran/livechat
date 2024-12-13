@@ -11,66 +11,73 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css?ver=0.3" />
+    <link rel="stylesheet" href="mobile.css?ver=0.3" />
     <title>Chat app</title>
   </head>
   <body>
-    <h3 class="clients-total" id="client-total">Total clients: 1</h3>
-    <div class="main">
-      <div class="name">
-        <span><i class="far fa-user"></i></span>
-        <input
-          type="text"
-          id="name-input"
-          class="name-input"
-          value="anonymous"
-          maxlength="20"
-        />
-        <span class="feedback" id="feedback"></span>
+    <div class="big-image-container" hidden>
+      <i class="fa fa-times imageCloseIcon" onclick="closeImage()"></i>
+      <img class="big-image" src="" alt="image"/>
+    </div>
+    <div class="content">
+      <h3 class="clients-total" id="client-total">Total clients: 1</h3>
+      <div class="main">
+        <div class="name">
+          <span><i class="far fa-user"></i></span>
+          <input
+            type="text"
+            id="name-input"
+            class="name-input"
+            value="anonymous"
+            maxlength="20"
+          />
+          <span class="feedback" id="feedback"></span>
+        </div>
+
+        <ul class="message-container" id="message-container">
+          <!-- These li elements are only for reference, and therefore, they are commented out... -->
+          <!-- <li class="message-left">
+            <p class="tagMessage left-tag">i</p>
+            <p class="message">
+              lorem impsun
+              <span>bluebird ● 26 July 10:40</span>
+            </p>
+          </li>
+
+          <li class="message-right">
+            <p class="tagMessage right-tag">i</p>
+            <p class="message">
+              lorem impsun
+              <span>bluebird ● 26 July 10:40</span>
+            </p>
+          </li>
+
+          <li class="message-feedback">
+            <p class="feedback" id="feedback"></p>
+          </li> -->
+        </ul>
+
+        <div class="replyContainer" style="display: none;">
+          <span id="replyMessage"></span>
+          <i class="fa fa-times closeIcon" onclick="replyClose()"></i>
+        </div>
+        <form class="message-form" id="message-form" style="background-color: white;">
+          <i onclick="openfile()" class="fa fa-paperclip" style="background-color:white;margin: 15px;cursor: pointer;"></i>
+          <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelection(event)" />
+          <input
+            autocomplete="off"
+            type="text"
+            name="message"
+            id="message-input"
+            class="message-input"
+            placeholder="Type"
+          />
+          <div class="v-divider"></div>
+          <button type="submit" class="send-button">
+            send <span><i class="fas fa-paper-plane"></i></span>
+          </button>
+        </form>
       </div>
-
-      <ul class="message-container" id="message-container">
-        <!-- These li elements are only for reference, and therefore, they are commented out... -->
-        <!-- <li class="message-left">
-          <p class="tagMessage left-tag">i</p>
-          <p class="message">
-            lorem impsun
-            <span>bluebird ● 26 July 10:40</span>
-          </p>
-        </li>
-
-        <li class="message-right">
-          <p class="tagMessage right-tag">i</p>
-          <p class="message">
-            lorem impsun
-            <span>bluebird ● 26 July 10:40</span>
-          </p>
-        </li>
-
-        <li class="message-feedback">
-          <p class="feedback" id="feedback"></p>
-        </li> -->
-      </ul>
-
-      <div class="replyContainer" style="display: none;">
-        <span id="replyMessage"></span>
-        <i class="fa fa-times closeIcon" onclick="replyClose()"></i>
-      </div>
-      <form class="message-form" id="message-form" style="background-color: white;">
-        <i onclick="openfile()" class="fa fa-paperclip" style="background-color:white;margin: 15px;cursor: pointer;"></i>
-        <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelection(event)" />
-        <input
-          autocomplete="off"
-          type="text"
-          name="message"
-          id="message-input"
-          class="message-input"
-          placeholder="Type"
-        />
-        <div class="v-divider"></div>
-        <button type="submit" class="send-button">
-          send <span><i class="fas fa-paper-plane"></i></span>
-        </button>
-      </form>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

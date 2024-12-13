@@ -72,7 +72,7 @@ function addMessageToUI(isOwnMessage, data) {
 
   const isFileMessage = data.isFile ? true : false;
   const fileElement = isFileMessage
-    ? `<div style="width:250px;height:200px"><img class="message-image" src="${data.message}" alt="image" style="max-width: 200px; max-height: 200px;border-radius:10px"/><span class="message" data-message-id="${data.id}" hidden><i style="font-size: 15px;">img: </i>${data.fileName}</span></div>`
+    ? `<div style="width:250px;height:200px"><img onclick=openImage('${data.message}') class="message-image" src="${data.message}" alt="image" style="max-width: 200px; max-height: 200px;border-radius:10px"/><span class="message" data-message-id="${data.id}" hidden><i style="font-size: 15px;">img: </i>${data.fileName}</span></div>`
     : `<p class="message" data-message-id="${data.id}">${data.message}</p>`;
 
   const element = `
@@ -106,6 +106,7 @@ messageInput.addEventListener('focus',(e)=>{
     feedback:`${nameInput.value} is typing`
   })
 })
+
 // document.addEventListener('keypress',(e)=>{
 //   if(e.key == 'Enter'){
 //     return
@@ -114,6 +115,7 @@ messageInput.addEventListener('focus',(e)=>{
 //   messageInput.value += e.key
 //   messageInput.focus()
 // })
+
 messageInput.addEventListener('blur',(e)=>{
   socket.emit('feedback',{
     feedback:''
