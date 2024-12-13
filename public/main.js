@@ -26,6 +26,7 @@ function sendMessage() {
     contentPromise = Promise.resolve(messageInput.value);
   } else {
     const file = fileInput.files[0];
+    if(['image/jpeg', 'image/png', 'image/jpg'].includes(fileInput.files[0].type)) return
     contentPromise = new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
