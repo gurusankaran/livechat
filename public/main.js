@@ -48,6 +48,7 @@ function sendMessage() {
     // Include replyMessage if it exists
     if (replyMessage.innerText !== '') {
       data.replyMessage = replyMessage.innerHTML;
+      data.referId = referId      
     }
 
     socket.emit('message', data); // Emit the message through WebSocket
@@ -85,7 +86,7 @@ function addMessageToUI(isOwnMessage, data) {
             </i>
         </span>
         ${data.replyMessage !== undefined 
-          ? `<p href="#${data.id}" class="tagMessage ${isOwnMessage ? "right-tag" : "left-tag"}">${data.replyMessage}</p>` 
+          ? `<p href="#${data.referId}" onclick="anchorTag('${data.id}','${data.referId}')" class="tagMessage ${isOwnMessage ? "right-tag" : "left-tag"}">${data.replyMessage}</p>` 
           : ''}
         ${fileElement} 
         <span>${data.name} ● ${data.dateTime}</span>
@@ -105,19 +106,16 @@ messageInput.addEventListener('focus',(e)=>{
   socket.emit('feedback',{
     feedback:`${nameInput.value} is typing`
   })
-  scrollToBottom()
 })
 messageInput.addEventListener('keypress',(e)=>{
   socket.emit('feedback',{
     feedback:`${nameInput.value} is typing`
   })
-  scrollToBottom()
 })
 messageInput.addEventListener('blur',(e)=>{
   socket.emit('feedback',{
     feedback:''
   })
-  scrollToBottom()
 })
 
 socket.on('feedback',(data)=>{
