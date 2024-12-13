@@ -31,7 +31,6 @@ function onConnected(socket){
     socket.on('message',(data)=>{
         const randomID = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
         data.id = randomID        
-        console.log(data);
         socket.broadcast.emit('chat-message', data)
     })
 
