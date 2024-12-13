@@ -106,14 +106,14 @@ messageInput.addEventListener('focus',(e)=>{
     feedback:`${nameInput.value} is typing`
   })
 })
-document.addEventListener('keypress',(e)=>{
-  if(e.key == 'Enter'){
-    return
-  }
-  e.preventDefault()
-  messageInput.value += e.key
-  messageInput.focus()
-})
+// document.addEventListener('keypress',(e)=>{
+//   if(e.key == 'Enter'){
+//     return
+//   }
+//   e.preventDefault()
+//   messageInput.value += e.key
+//   messageInput.focus()
+// })
 messageInput.addEventListener('blur',(e)=>{
   socket.emit('feedback',{
     feedback:''
