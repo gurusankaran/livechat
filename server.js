@@ -4,14 +4,12 @@ const port = 3500
 
 
 app.use(express.static('public'))
-// app.get('/',(req,res)=>{
-//     res.send('hi')
-// })
 
 const io = require('socket.io')(app.listen(port,()=>{
     console.log(`Port listening on http://localhost:${port}`);
 const io = require('socket.io')
 }))
+
 
 let socketConnected = new Set()
 
@@ -30,7 +28,7 @@ function onConnected(socket){
 
     socket.on('message',(data)=>{
         const randomID = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
-        data.id = randomID        
+        data.id = randomID
         socket.broadcast.emit('chat-message', data)
     })
 
